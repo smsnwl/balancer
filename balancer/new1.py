@@ -119,9 +119,9 @@ if __name__=='__main__':
 #            print("w0,w1,w2,W", w0,w1,w2,W)
             if W > 5 and  W - Wa > 5:
                 time.sleep(1)
-                for i in range(1):
-                    tr.start(3)
-                    time.sleep(0.5)
+                for i in range(10000):
+#                    tr.start(3)
+                    time.sleep(0.01)
                     m0 = h0.getdv()
                     m1 = h1.getdv()
                     m2 = h2.getdv()
@@ -164,11 +164,11 @@ if __name__=='__main__':
                     print("B", int(B*100)/100)
                     tr.change(B)  
 
-                    print("No.", j)
+                    print("No. j", j, "i", i)
                     print("g= ", int(g*100)/100, "B0=  ", int(B0*180/math.pi),"B1=  ", int(B1*180/math.pi))
                     print("m1", m0[0], m1[0], m2[0], int(w0/k0*10)/10, int(w1/k1*10)/10, int(w2/k2*10)/10, int(W*10)/10)
                 
-                    with open("data3.csv", "a") as datafile:
+                    with open("datan.csv", "a") as datafile:
 #                        datafile.write(time.strftime("%Y-%m-%d-%H-%M-%S"))
                         # datafile.write(" %d"%j)
                         # datafile.write(", %d"%W)
@@ -178,7 +178,9 @@ if __name__=='__main__':
                         # datafile.write(", %.01f"%x0)
                         # datafile.write(", %.01f"%y0)
                         # datafile.write(", %.01f\n"%d)
-                        datafile.write(" %d"%(j*20))
+#                        datafile.write(" %d"%(j*20))
+                        datafile.write(" %d"%i)
+                        datafile.write(", %d"%j)
                         datafile.write(", %d"%m0[0])
                         datafile.write(", %d"%m1[0])
                         datafile.write(", %d"%m2[0])
