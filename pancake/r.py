@@ -257,6 +257,19 @@ class Servo():
     def stop(self):
         self.pwm.stop()
 
+class InfraredPair():
+    def __init__(self, pin):
+        self.pin = pin
+        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+    def waitforpress(self):
+        GPIO.wait_for_edge(self.pin, GPIO.FALLING)
+        
+    def getinput(self):
+        return GPIO.input(self.pin)
+
+    def getneginput(self):
+        return (not GPIO.input(self.pin))
 
 
     
@@ -277,7 +290,7 @@ class Button():
         GPIO.wait_for_edge(self.pin, GPIO.FALLING)
         
     def getinput(self):
-        return GPIO.input(self.pin)
+        return not GPIO.input(self.pin)
             
 class L298():
     def __init__(self,IN1 , IN2, IN3, IN4, f):
@@ -351,14 +364,16 @@ if __name__ == '__main__':
     btnbd = Button(20)
     btnxz = Button(16)
         
-    print("t0",time.time())
-    ks = sj.rotate(dir, 600, btnZ.getinput)
 
+    print("btnZ",btnZ.getinput())
+    ks = sj.rotate(dir, 600, btnZ.getinput)
+    print("btnZ",btnZ.getinput())
+    
     # up_down(dir, ns)
     # time.sleep(2)
     # up_down(1-dir, ns)
     # print("step1")
-    # bd_xz.rotate(-200,300)
+    bdxz(200,300,btnZ.getinput)
 
     # bdxz(-200,200)
     # bdxz(-ms,msx)
